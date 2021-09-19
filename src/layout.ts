@@ -57,8 +57,17 @@ export function renderLayout(){
 
     nav.appendChild(darkModeToggle);
 
+    const mainContent = document.createElement("main");
+    layout.appendChild(mainContent);
 
+    document.addEventListener("topLink", () => {
+        newLink.classList.remove("active");
+        topLink.classList.add("active");
+    });
+    document.addEventListener("newLink", () => {
+        topLink.classList.remove("active");
+        newLink.classList.add("active");
+    });
 
-
-    return {layout};
+    return {layout, mainContent};
 }
