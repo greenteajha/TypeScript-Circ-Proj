@@ -57,7 +57,7 @@ export async function getComments(storyId: number){
 let userCache: { [username: string]: User } = {};
 
 export async function getUser(username: string){
-    if(userCache[username]) return userCache;
+    if(userCache[username]) return userCache[username];
     const user: User = await (await fetch(getUserUrl(username))).json();
     userCache[username] = user;
     return user;
