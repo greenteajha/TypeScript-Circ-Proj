@@ -27,4 +27,30 @@ async function renderComment(id: number){
     const story = await getItem(id);
     const commentContainer = document.createElement("div");
     commentContainer.classList.add("comment");
+
+    const commentTagLine = document.createElement("p");
+    commentTagLine.classList.add("meta-info");
+    commentTagLine.appendChild(document.createTextNode("by "));
+
+    const authorLink = document.createElement("a");
+    authorLink.href = "#";
+    authorLink.addEventListener("click", () => {
+        document.dispatchEvent(
+            new CustomEvent<{ user: string }>("user", { detail: {user: story.by}})
+        );
+    });
+    authorLink.innerText = story.by;
+    commentTagLine.appendChild(authorLink);
+
+    commentTagLine.appendChild(
+        document.createTextNode(` on ${formatDate(new Date(story.time * 1000))}`)
+    );
+    commentContainer.appendChild(commentTagLine);
+
+    const comment = document.createElement("div");
+    comment.classList.add("comment-text");
+    comment.innerHTML = story.text;
+    commentContainer.appendChild(comment);
+
+    return commentContainer;
 }
