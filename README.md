@@ -1,4 +1,4 @@
-<h3>Ui.dev TypeScript Course Curriculum</h3>
+<h3><u>Ui.dev TypeScript Course Curriculum</u></h3>
 
 ### Info
 
