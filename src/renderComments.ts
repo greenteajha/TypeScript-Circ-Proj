@@ -33,7 +33,7 @@ async function renderComment(id: number){
     commentTagLine.appendChild(document.createTextNode("by "));
 
     const authorLink = document.createElement("a");
-    authorLink.href = "#";
+    authorLink.href = "abc.com";
     authorLink.addEventListener("click", () => {
         document.dispatchEvent(
             new CustomEvent<{ user: string }>("user", { detail: {user: story.by}})
