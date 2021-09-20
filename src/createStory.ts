@@ -27,7 +27,7 @@ export function createStory(story: Story){
 
     tagline.appendChild(
         document.createTextNode(
-            ` on ${formatDate(new Date(story.time * 1000))} with`
+            ` on ${formatDate(new Date(story.time * 1000))} with `
         )
     );
 
