@@ -1,4 +1,5 @@
 import { Story } from "./api"
+import { formatDate } from "./util/formatDate";
 
 export function createStory(story: Story){
     if(!story.url || !story.title) return;
@@ -23,4 +24,28 @@ export function createStory(story: Story){
     });
     authorLink.innerText = story.by;
     tagline.appendChild(authorLink);
+
+    tagline.appendChild(
+        document.createTextNode(
+            ` on ${formatDate(new Date(story.time * 1000))} with`
+        )
+    );
+
+    const commentCount = document.createElement("a");
+    commentCount.href = "#";
+    commentCount.innerText = story.descendants?.toString() ?? "0";
+    commentCount.addEventListener("click", () => {
+        commentCount.dispatchEvent(
+            new CustomEvent<{ story: number }>("comments", {
+                detail: { story: story.id },
+            })
+        );
+    });
+
+    tagline.appendChild(commentCount);
+
+    tagline.appendChild(document.createTextNode(" comments"));
+
+    storyWrapper.appendChild(tagline);
+    return storyWrapper;
 }
